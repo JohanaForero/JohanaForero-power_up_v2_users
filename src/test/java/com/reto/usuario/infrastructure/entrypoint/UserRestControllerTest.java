@@ -143,4 +143,11 @@ class UserRestControllerTest {
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.message").value(ExceptionResponse.EMAIL_EXISTS.getMessage()));
     }
+
+    @Test
+    void test_registerUserAsCustomer_withCompleteCreateAccountCustomerRequestDto_shouldResponseSavedIdUserAndStatusCreated(){}
+
+    @Test
+    void test_registerUserAsCustomer_withFieldEmailIsInvalidInCreateAccountCustomerRequestDto_shouldThrowStatusBadRequest() throws Exception{}
+    
 }

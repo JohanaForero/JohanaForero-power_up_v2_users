@@ -1,5 +1,6 @@
 package com.reto.usuario.application.mapper.request;
 
+import com.reto.usuario.application.dto.request.CreateCustomerAccountRequestDto;
 import com.reto.usuario.application.dto.request.UserRequestDto;
 import com.reto.usuario.application.dto.request.UserRequestToCreateEmployeeDto;
 import com.reto.usuario.domain.model.UserModel;
@@ -16,4 +17,10 @@ public interface IUserRequestMapper {
     @Mapping(target = "idUser", ignore = true)
     @Mapping(target = "rol.idRol", source = "idRol")
     UserModel toUserModelEmployee(UserRequestToCreateEmployeeDto userRequestToCreateEmployeeDto);
+
+    @Mapping(target = "idUser", ignore = true)
+    @Mapping(target = "rol.idRol", source = "idRol")
+    UserModel toUserModelCustomer(CreateCustomerAccountRequestDto customerAccountRequestDto);
+
+
 }

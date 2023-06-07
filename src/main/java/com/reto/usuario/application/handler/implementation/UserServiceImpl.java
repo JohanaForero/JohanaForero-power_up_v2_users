@@ -1,13 +1,17 @@
 package com.reto.usuario.application.handler.implementation;
 
+import com.reto.usuario.application.dto.request.CreateCustomerAccountRequestDto;
 import com.reto.usuario.application.dto.request.UserRequestDto;
 import com.reto.usuario.application.dto.request.UserRequestToCreateEmployeeDto;
+import com.reto.usuario.application.dto.response.UserCustomerResponseDto;
 import com.reto.usuario.application.dto.response.UserOwnerResponseDto;
 import com.reto.usuario.application.dto.response.UserResponseDto;
 import com.reto.usuario.application.handler.IUserService;
 import com.reto.usuario.application.mapper.request.IUserRequestMapper;
 import com.reto.usuario.application.mapper.response.IUserResponseMapper;
 import com.reto.usuario.domain.api.IUserUseCasePort;
+
+import com.reto.usuario.domain.model.RolModel;
 import com.reto.usuario.domain.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void registerUserWithEmployeeRole(UserRequestToCreateEmployeeDto userRequestToCreateEmployeeDto) {
         userUseCasePort.registerUserWithEmployeeRole(userRequestMapper.toUserModelEmployee(userRequestToCreateEmployeeDto));
+    }
+
+    @Override
+    public UserCustomerResponseDto registerUserWithCustomerRole(CreateCustomerAccountRequestDto createCustomerAccountRequestDto) {
+        RolModel rolModel = new RolModel();
+        UserModel userModel = new UserModel();
+        userModel.setName(createCustomerAccountRequestDto.getName());
+        userModel.setLastName(createCustomerAccountRequestDto.getLastName());
+        userModel.setCellPhone(createCustomerAccountRequestDto.getCellPhone());
+        userModel.setEmail(createCustomerAccountRequestDto.getEmail());
+        userModel.setPassword(createCustomerAccountRequestDto.getPassword());
+        userModel.setIdentificationDocument(createCustomerAccountRequestDto.getIdentificationDocument());
+        rolModel.setIdRol(createCustomerAccountRequestDto.getIdRol());
+        userModel.setRol(rolModel);
+        return userUseCasePort.registerUserWithCustomerRol(userRequestMapper.toUserModel(userModel));
     }
 
     @Override

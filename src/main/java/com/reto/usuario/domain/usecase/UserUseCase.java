@@ -1,5 +1,6 @@
 package com.reto.usuario.domain.usecase;
 
+import com.reto.usuario.application.dto.response.UserCustomerResponseDto;
 import com.reto.usuario.domain.api.IUserUseCasePort;
 import com.reto.usuario.domain.exceptions.EmailExistsException;
 import com.reto.usuario.domain.exceptions.EmptyFieldsException;
@@ -42,6 +43,14 @@ public class UserUseCase implements IUserUseCasePort {
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userModel.setRol(findRoleByIdAndCompareRoleName("EMPLEADO", userModel.getRol().getIdRol()));
         userPersistenceDomainPort.saveUser(userModel);
+    }
+
+    @Override
+    public UserModel registerUserWithCustomerRole(UserModel userModel) {
+        restrictionsWhenSavingAUser(userModel);
+        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        userModel.setRol(findRoleByIdAndCompareRoleName("CLIENTE", userModel.getRol().getIdRol()));
+        return userPersistenceDomainPort.saveUser(userModel);
     }
 
     private RolModel findRoleByIdAndCompareRoleName(String roleName, Long idRol) {
