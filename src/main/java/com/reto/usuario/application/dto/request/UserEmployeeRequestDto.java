@@ -1,4 +1,4 @@
-package com.reto.usuario.application.dto.response;
+package com.reto.usuario.application.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,14 +7,16 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+@AllArgsConstructor
+public class UserEmployeeRequestDto {
 
     private String name;
     private String lastName;
     private Long identificationDocument;
     private String cellPhone;
     private String email;
-    private String rol;
+    private String password;
+    private Long idRol;
+    private Long idRestaurant;
 }
