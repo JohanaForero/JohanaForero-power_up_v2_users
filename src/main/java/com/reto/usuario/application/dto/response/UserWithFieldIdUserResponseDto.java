@@ -9,7 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserOwnerResponseDto {
+public class UserWithFieldIdUserResponseDto {
 
     private Long idUser;
+    private String name;
+    private String lastName;
+    private Long identificationDocument;
+    private String cellPhone;
+    private String email;
+    private String rol;
 }
