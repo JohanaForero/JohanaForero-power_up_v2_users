@@ -45,14 +45,6 @@ public class UserUseCase implements IUserUseCasePort {
         userPersistenceDomainPort.saveUser(userModel);
     }
 
-    @Override
-    public UserModel registerUserWithCustomerRole(UserModel userModel) {
-        restrictionsWhenSavingAUser(userModel);
-        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        userModel.setRol(findRoleByIdAndCompareRoleName("CLIENTE", userModel.getRol().getIdRol()));
-        return userPersistenceDomainPort.saveUser(userModel);
-    }
-
     private RolModel findRoleByIdAndCompareRoleName(String roleName, Long idRol) {
         RolModel rolModel = rolPersistenceDomainPort.findByIdRol(idRol);
         if(rolModel == null) {
@@ -121,6 +113,11 @@ public class UserUseCase implements IUserUseCasePort {
             throw new UserNotFoundException("User not found");
         }
         return userModel;
+    }
+
+    @Override
+    public UserModel registerUserWithCustomerRol(UserModel userModel) {
+        return null;
     }
 }
 

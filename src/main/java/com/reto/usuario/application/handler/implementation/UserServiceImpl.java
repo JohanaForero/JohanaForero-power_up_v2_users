@@ -10,8 +10,6 @@ import com.reto.usuario.application.handler.IUserService;
 import com.reto.usuario.application.mapper.request.IUserRequestMapper;
 import com.reto.usuario.application.mapper.response.IUserResponseMapper;
 import com.reto.usuario.domain.api.IUserUseCasePort;
-
-import com.reto.usuario.domain.model.RolModel;
 import com.reto.usuario.domain.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,23 +36,25 @@ public class UserServiceImpl implements IUserService {
         userUseCasePort.registerUserWithEmployeeRole(userRequestMapper.toUserModelEmployee(userRequestToCreateEmployeeDto));
     }
 
-    @Override
-    public UserCustomerResponseDto registerUserWithCustomerRole(CreateCustomerAccountRequestDto createCustomerAccountRequestDto) {
-        RolModel rolModel = new RolModel();
-        UserModel userModel = new UserModel();
-        userModel.setName(createCustomerAccountRequestDto.getName());
-        userModel.setLastName(createCustomerAccountRequestDto.getLastName());
-        userModel.setCellPhone(createCustomerAccountRequestDto.getCellPhone());
-        userModel.setEmail(createCustomerAccountRequestDto.getEmail());
-        userModel.setPassword(createCustomerAccountRequestDto.getPassword());
-        userModel.setIdentificationDocument(createCustomerAccountRequestDto.getIdentificationDocument());
-        rolModel.setIdRol(createCustomerAccountRequestDto.getIdRol());
-        userModel.setRol(rolModel);
-        return userUseCasePort.registerUserWithCustomerRol(userRequestMapper.toUserModel(userModel));
-    }
+    //*     //*    UserModel userModel = new UserModel();
+    //*    userModel.setName(createCustomerAccountRequestDto.getName());
+    //*    userModel.setLastName(createCustomerAccountRequestDto.getLastName());
+    //*     userModel.setCellPhone(createCustomerAccountRequestDto.getCellPhone());
+    //*      userModel.setEmail(createCustomerAccountRequestDto.getEmail());
+    //*     userModel.setPassword(createCustomerAccountRequestDto.getPassword());
+    //*    userModel.setIdentificationDocument(createCustomerAccountRequestDto.getIdentificationDocument());
+    //*    rolModel.setIdRol(createCustomerAccountRequestDto.getIdRol());
+    //*   userModel.setRol(rolModel);
+     //*   return userUseCasePort.registerUserWithCustomerRol(userRequestMapper.toUserModel(createCustomerAccountRequestDto));
+
 
     @Override
     public UserResponseDto getUserById(Long idUser) {
         return userResponseMapper.toUserResponseDto(userUseCasePort.getUserById(idUser));
+    }
+
+    @Override
+    public UserCustomerResponseDto registerUserWithCustomerRole(CreateCustomerAccountRequestDto createCustomerAccountRequestDto) {
+        return null;
     }
 }
