@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Consumer</title>
+    <link rel="stylesheet" href="ruta/bootstrap.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>restaurante  forest!</h1>
+
+    <h2>registrar usuario</h2>
+    <form id="register-owner-form">
+        <div class="mb-3">
+            <label for="owner-name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="owner-name" required>
+        </div>
+        <div class="mb-3">
+            <label for="owner-email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="owner-email" required>
+        </div>
+        <!-- Otros campos necesarios para el registro -->
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    <!-- Otros formularios para los otros endpoints -->
+
+    <div id="response-container" class="response-container"></div>
+</div>
+
+<script src="ruta/bootstrap.js"></script>
+<script>
+        const registerOwnerForm = document.getElementById('register-owner-form');
+        const responseContainer = document.getElementById('response-container');
+
+        registerOwnerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('owner-name').value;
+            const email = document.getElementById('owner-email').value;
+
+            const requestBody = {
+                name: name,
+                email: email
+                // Agrega otros campos necesarios para el registro
+            };
+
+            fetch('/user-micro/user/owner', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Maneja la respuesta del endpoint
+                responseContainer.innerHTML = JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                console.error(error);
+                responseContainer.innerHTML = 'Error: ' + error.message;
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
