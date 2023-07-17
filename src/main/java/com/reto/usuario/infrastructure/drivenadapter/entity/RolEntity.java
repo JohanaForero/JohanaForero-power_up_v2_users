@@ -22,8 +22,6 @@ public class RolEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRol;
-    @Column(name = "nombre")
     private String name;
-    @Column(name = "descripcion")
     private String description;
 }
