@@ -11,4 +11,18 @@ body{
     height: 300px;
     background-image: url('./img/tapiz.jpg');
     color: white;
+    display: flex;
+     flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    padding: 30px;
 }
+
+.formulario_container{
+       display: flex;
+       flex-direction: column;
+       width: 300px;
+       font-size: 20px;
+}
+
